@@ -1,0 +1,24 @@
+body {
+  font-family: monaco;
+}
+
+h1 {
+  width: 266px;
+  margin: 40px auto;
+  font-size: 30px;
+}
+
+h3 {
+  width: 685px;
+  margin: 30px auto 0 auto;
+  font-size: 18px;
+}
+
+#canvas {
+  width: 741px;
+  margin: auto;
+}
+
+#steps {
+  height: 25px;  
+}
