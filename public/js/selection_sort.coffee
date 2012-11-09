@@ -8,12 +8,8 @@ class SelectionSort
     this.stroke          = @stroke
     
   construct_array: ->
-    index = 0
-    max   = (parseInt(this.canvas_width / this.stroke))
-    while index < max
-      value = parseInt((Math.random() * 1000 % this.canvas_height - 50) + 50)
-      this.data[index] = new Node(index, value)
-      index += 1
+    while this.data.length < (parseInt(this.canvas_width / this.stroke))
+      this.data.push(new Node(this.data.length, parseInt((Math.random() * 1000 % this.canvas_height - 50) + 50)))
 
   first_unsorted_index: ->
     for element, index in this.data
@@ -24,17 +20,21 @@ class SelectionSort
   swap_elements: (minimum) ->
     first       = this.first_unsorted_index()
     first_y     = this.data[first].y
+
     this.animation_list.add_animation_node(this.data[first], "swap")
     this.animation_list.add_animation_node(this.data[minimum], "swap")
     this.animation_list.add_animation_node(this.data[first], "swap")
     this.animation_list.add_animation_node(this.data[minimum], "swap")
+
     this.data[first].y     = this.data[minimum].y
     this.data[minimum].y   = first_y
     this.data[first].state = "sorted"
+
     this.animation_list.add_animation_node(this.data[first], "swap")
     this.animation_list.add_animation_node(this.data[minimum], "swap")
     this.animation_list.add_animation_node(this.data[first], "swap")
     this.animation_list.add_animation_node(this.data[minimum], "swap")
+
     if minimum == first
       this.animation_list.add_animation_node(this.data[first], "sorted")
     else
@@ -86,8 +86,10 @@ class LinkedList
     node   = this.first
     while length < this.length
       if min.x == node.x && min.y == node.y
+
         animation_list.add_animation_node(this.first, "swap")
         animation_list.add_animation_node(min, "swap")               
+
         min.y        = this.first.y
         this.first.y = node.y
 
@@ -116,7 +118,6 @@ class LinkedList
   # adds a new node to a linked list. first node is "next" to last node
   # first_node.prev -> second_node.prev -> third_node ...
   # first_node <- second_node.next <- third_node.next
-
   add_node: (node) ->
     if this.length == 0
       node.prev  = node
@@ -218,7 +219,8 @@ class Animate
 
 $(document).ready () ->
   # number in milliseconds to pause between animation frames
-  frame_rate    = 50
+  frame_rate    = 75
+  
   # number in pixels to determine width of data set lines
   stroke        = 35
   canvas_height = parseInt($('#selection_sort').css('height').replace("px", ""))

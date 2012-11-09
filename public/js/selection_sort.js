@@ -17,14 +17,10 @@
     }
 
     SelectionSort.prototype.construct_array = function() {
-      var index, max, value, _results;
-      index = 0;
-      max = parseInt(this.canvas_width / this.stroke);
+      var _results;
       _results = [];
-      while (index < max) {
-        value = parseInt((Math.random() * 1000 % this.canvas_height - 50) + 50);
-        this.data[index] = new Node(index, value);
-        _results.push(index += 1);
+      while (this.data.length < (parseInt(this.canvas_width / this.stroke))) {
+        _results.push(this.data.push(new Node(this.data.length, parseInt((Math.random() * 1000 % this.canvas_height - 50) + 50))));
       }
       return _results;
     };
@@ -299,7 +295,7 @@
 
   $(document).ready(function() {
     var animate, animation_list, canvas_height, canvas_width, frame_rate, selection, sorted_list, stroke;
-    frame_rate = 50;
+    frame_rate = 75;
     stroke = 35;
     canvas_height = parseInt($('#selection_sort').css('height').replace("px", ""));
     canvas_width = parseInt($('#selection_sort').css('width').replace("px", ""));
